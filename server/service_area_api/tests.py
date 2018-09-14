@@ -17,12 +17,33 @@ class ModelTestCase(TestCase):
         self.service_area_provider_id = 1
         self.service_area_name = 'name'
         self.service_area_price = 500.00
-        self.service_area_polygon = 'geojson'
+        self.service_area_geometry = 'geojson'
+
+        self.service_area_latitude_1 = 10
+        self.service_area_longitude_1 = 10
+
+        self.service_area_latitude_2 = 10
+        self.service_area_longitude_2 = 20
+
+        self.service_area_latitude_3 = 20
+        self.service_area_longitude_3 = 10
+
+        self.service_area_latitude_4 = 20
+        self.service_area_longitude_4 = 20
+
         self.service_area = \
             ServiceArea(pid=self.service_area_provider_id,
                         name=self.service_area_name,
                         price=self.service_area_price,
-                        polygon=self.service_area_polygon)
+                        geometry=self.service_area_geometry,
+                        latitude_1=self.service_area_latitude_1,
+                        latitude_2=self.service_area_latitude_2,
+                        latitude_3=self.service_area_latitude_3,
+                        latitude_4=self.service_area_latitude_4,
+                        longitude_1=self.service_area_longitude_1,
+                        longitude_2=self.service_area_longitude_2,
+                        longitude_3=self.service_area_longitude_3,
+                        longitude_4=self.service_area_longitude_4)
 
     def test_model_can_create_a_service_area(self):
         """Test the ServiceArea model can create a service area."""
@@ -45,7 +66,15 @@ class ViewTestCase(TestCase):
             'pid': 1,
             'name': 'name',
             'price': 500.00,
-            'polygon': 'geojson',
+            'geometry': 'polygon',
+            'latitude_1': 10,
+            'longitude_1': 10,
+            'latitude_2': 10,
+            'longitude_2': 20,
+            'latitude_3': 20,
+            'longitude_3': 10,
+            'latitude_4': 20,
+            'longitude_4': 20,
             }
         self.response = self.client.post(reverse('create'),
                 self.service_area_data, format='json')
@@ -74,7 +103,15 @@ class ViewTestCase(TestCase):
             'pid': 1,
             'name': 'new name',
             'price': 1000.00,
-            'polygon': 'new geojson',
+            'geometry': 'new polygon',
+            'latitude_1': 20,
+            'longitude_1': 20,
+            'latitude_2': 20,
+            'longitude_2': 30,
+            'latitude_3': 30,
+            'longitude_3': 20,
+            'latitude_4': 30,
+            'longitude_4': 30,
             }
         response = self.client.put(reverse('details',
                                    kwargs={'pk': service_area.id}),
